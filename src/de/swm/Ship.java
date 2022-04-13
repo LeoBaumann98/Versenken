@@ -1,59 +1,28 @@
 package de.swm;
 
 
-public class Ship {
+public abstract class Ship {
 
     private String type;
     private int xCoordinate;
     private int yCoordinate;
-    private int quantity;
     private int length;
-
     private char sign;
+    private int quantity;
+    private boolean isSunk;
 
+    public abstract int getQuantity();
 
-    public Ship (int quantity, int length, String type, char sign) {
-        this.quantity = quantity;
-        this.length = length;
-        this.type = type;
-        this.sign = sign;
-    }
+    public abstract void setQuantity(int quantity);
 
+    public abstract int getLength();
 
-    public char getSign() {
-        return sign;
-    }
+    public abstract char getSign();
 
-    public int getxCoordinate() {
-        return xCoordinate;
-    }
+    public abstract boolean isSunk();
 
-    public void setxCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
-    }
+    public abstract void setLength(int length);
 
-    public int getyCoordinate() {
-        return yCoordinate;
-    }
-
-    public void setyCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
+    public abstract void setLengthToDefault();
 }
 
