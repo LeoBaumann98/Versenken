@@ -37,68 +37,71 @@ public class Board {
                     board[i][orientation] = shipType;
                 }
                 return true;
-                } else {
-                    for(int i = coordinatesStart; i < coordinatesEnd; i++) {
-                        board[orientation][i] = shipType;
-                    }
-                    return true;
+            } else {
+                for(int i = coordinatesStart; i <= coordinatesEnd; i++) {
+                    board[orientation][i] = shipType;
+                }
+                return true;
             }
         return false;
     }
 
     public boolean checkValidPlacement(int length, int coordinatesStart, int coordinatesEnd, int orientation, int positioning) {
-        if (coordinatesEnd - coordinatesStart < length - 1) {
+        if (coordinatesEnd - coordinatesStart > length - 1) {
             return false;
-        }else if (positioning == 1) {
-                if (board[coordinatesStart][orientation] != '~' || board[coordinatesEnd][orientation] != '~') {
-                    return false;
-                }
-                if (coordinatesStart + length > board.length) {
-                    return false;
-                }
-            if (coordinatesStart == 0 || orientation == 0) {
-                for (int i = coordinatesStart; i < length; i++) {
-                    if ((board[i + 1][orientation] != '~' || board[i][orientation + 1] != '~')) {
+        }
+        if(coordinatesStart == 10 || coordinatesEnd < coordinatesStart) {
+            return false;
+        }
+        if (positioning == 1) {
+            for (int i = coordinatesStart; i <= length; i++) {
+                if (i == 0 && orientation == 0) {
+                    if(board[i+1][orientation] != '~' || board[i][orientation+1] != '~'){
                         return false;
                     }
-                }
-            }else {
-                for (int i = coordinatesStart; i < length; i++) {
-                    if ((board[i + 1][orientation] != '~' || board[i][orientation + 1] != '~')) {
+                } else if(i == 0 && orientation == 10) {
+                    if(board[i+1][orientation] != '~' || board[i][orientation-1] != '~'){
                         return false;
-                    } else if ((board[i - 1][orientation] != '~' || board[coordinatesStart][orientation - 1] != '~')) {
+                    }
+                } else if (i == 0){
+                    if(board[i+1][orientation] != '~' || board[i][orientation+1] != '~' || board[i][orientation-1] != '~') {
+                        return false;
+                    }
+                } else if (orientation == 0){
+                    if (board[i][orientation+1] != '~' || board[i+1][orientation] != '~' || board[i-1][orientation] !='~') {
+                        return false;
+                    }
+                } else {
+                    if(board[i+1][orientation] != '~' || board[i-1][orientation] != '~' || board[i][orientation+1] != '~' || board[i][orientation-1] != '~'){
                         return false;
                     }
                 }
             }
-            } else if (positioning == 2) {
-                if (board[orientation][coordinatesStart] != '~' || board[orientation][coordinatesEnd] != '~') {
-                    return false;
-                }
-                if (coordinatesStart + length > board.length) {
-                    return false;
-                }
-                if (coordinatesStart == 0 || orientation == 0) {
-                    for (int i = coordinatesStart; i < length; i++) {
-                        if ((board[orientation + 1][i] != '~' || board[orientation][coordinatesStart + i] != '~')) {
-                            return false;
-                        }
+        } else if(positioning == 2){
+            for(int i = coordinatesStart; i <= length; i++){
+                if(i == 0 && orientation == 0) {
+                    if(board[orientation][i+1] != '~' || board[orientation+1][i] != '~'){
+                        return false;
                     }
-                }else {
-                    for (int i = coordinatesStart; i < length; i++) {
-                        if ((board[orientation + 1][i] != '~' || board[orientation][i + 1] != '~')) {
-                            return false;
-                        } else if ((board[orientation - 1][i] != '~' || board[orientation][i - 1] != '~')) {
-                            return false;
-                        }
+                }else if(i == 0 && orientation == 10){
+                    if(board[orientation][i+1] != '~' || board[orientation-1][i] != '~') {
+                        return false;
+                    }
+                } else if(i == 0) {
+                    if(board[orientation+1][i] != '~' || board[orientation-1][i] != '~' || board[orientation][i+1] != '~') {
+                        return false;
+                    }
+                } else if (orientation == 0) {
+                    if(board[orientation+1][i] != '~' || board[orientation][i+1] != '~' || board[orientation][i-1] !='~') {
+                        return false;
+                    }
+                } else {
+                    if(board[orientation+1][i] != '~' || board[orientation-1][i] != '~' || board[orientation][i+1] != '~' || board[orientation][i-1] != '~') {
+                        return false;
                     }
                 }
             }
+        }
         return true;
     }
 }
-
-
-
-
-    //TODO Check if Ship is hit, Check if able to place ship on given coordinates

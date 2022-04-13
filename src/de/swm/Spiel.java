@@ -48,36 +48,40 @@ public class Spiel {
                         "3.Destroyers (Anzahl: " + shipsP1[2].getQuantity() + ") | " +
                         "4. U-Boot (Anzahl: " + shipsP1[3].getQuantity() + ")");
                 int selection = scanner.nextInt();
-                System.out.println("1.Vertikal, 2.Horizontal");
-                int positioning = scanner.nextInt();
-                if (positioning == 1) {
-                    player1.ownBoard.showBoard();
-                    System.out.println("Bitte geben Sie zunächst die X-Koordinate ein");
-                    int orientation = scanner.nextInt() - 1;
-                    System.out.println("Start des Schiffs Y-Koordinate:");
-                    int CoordinatesStart = scanner.nextInt() - 1;
-                    System.out.println("Ende des Schiffs Y-Koordinate:");
-                    int CoordinatesEnd = scanner.nextInt() - 1;
-                    if(placeShip(shipsP1[selection - 1], positioning, player1.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                if(shipsP1[selection-1].getQuantity() > 0) {
+                    System.out.println("1.Vertikal, 2.Horizontal");
+                    int positioning = scanner.nextInt();
+                    if (positioning == 1) {
                         player1.ownBoard.showBoard();
-                        int currentShips = player1.getQuantityShips();
-                        player1.setQuantityShips(--currentShips);
-                        move++;
-                    }
-                } else if (positioning == 2) {
-                    player1.ownBoard.showBoard();
-                    System.out.println("Bitte geben Sie zunächst die Y-Koordinate ein");
-                    int orientation = scanner.nextInt() - 1;
-                    System.out.println("Start des Schiffs X-Koordinate:");
-                    int CoordinatesStart = scanner.nextInt() - 1;
-                    System.out.println("Ende des Schiffs X-Koordinate:");
-                    int CoordinatesEnd = scanner.nextInt();
-                    if(placeShip(shipsP1[selection - 1], positioning, player1.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                        System.out.println("Bitte geben Sie zunächst die X-Koordinate ein");
+                        int orientation = scanner.nextInt() - 1;
+                        System.out.println("Start des Schiffs Y-Koordinate:");
+                        int CoordinatesStart = scanner.nextInt() - 1;
+                        System.out.println("Ende des Schiffs Y-Koordinate:");
+                        int CoordinatesEnd = scanner.nextInt() - 1;
+                        if (placeShip(shipsP1[selection - 1], positioning, player1.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                            player1.ownBoard.showBoard();
+                            int currentShips = player1.getQuantityShips();
+                            player1.setQuantityShips(--currentShips);
+                            move++;
+                        }
+                    } else if (positioning == 2) {
                         player1.ownBoard.showBoard();
-                        int currentShips = player1.getQuantityShips();
-                        player1.setQuantityShips(--currentShips);
-                        move++;
+                        System.out.println("Bitte geben Sie zunächst die Y-Koordinate ein");
+                        int orientation = scanner.nextInt() - 1;
+                        System.out.println("Start des Schiffs X-Koordinate:");
+                        int CoordinatesStart = scanner.nextInt() - 1;
+                        System.out.println("Ende des Schiffs X-Koordinate:");
+                        int CoordinatesEnd = scanner.nextInt() - 1;
+                        if (placeShip(shipsP1[selection - 1], positioning, player1.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                            player1.ownBoard.showBoard();
+                            int currentShips = player1.getQuantityShips();
+                            player1.setQuantityShips(--currentShips);
+                            move++;
+                        }
                     }
+                } else {
+                    System.out.println("Keine Schiffe mehr diesen Typs verfügbar");
                 }
             } else {
                 System.out.println("Spieler 2 ist an der Reihe \nBitte geben Sie an welches Schiff Sie platzieren möchten\n" +
@@ -86,61 +90,62 @@ public class Spiel {
                         "3.Destroyers (Anzahl: " + shipsP2[2].getQuantity() + ") | " +
                         "4. U-Boot (Anzahl: " + shipsP2[3].getQuantity() + ")");
                 int selection = scanner.nextInt();
-                System.out.println("1.Vertikal, 2.Horizontal");
-                int positioning = scanner.nextInt();
-                if (positioning == 1) {
-                    player2.ownBoard.showBoard();
-                    System.out.println("Bitte geben Sie zunächst die X-Koordinate ein");
-                    int orientation = scanner.nextInt() - 1;
-                    System.out.println("Start des Schiffs Y-Koordinate:");
-                    int CoordinatesStart = scanner.nextInt() - 1;
-                    System.out.println("Ende des Schiffs Y-Koordinate:");
-                    int CoordinatesEnd = scanner.nextInt() - 1;
-                    if(placeShip(shipsP2[selection - 1], positioning, player2.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                if(shipsP2[selection-1].getQuantity() > 0) {
+                    System.out.println("1.Vertikal, 2.Horizontal");
+                    int positioning = scanner.nextInt();
+                    if (positioning == 1) {
                         player2.ownBoard.showBoard();
-                        int currentShips = player2.getQuantityShips();
-                        player2.setQuantityShips(--currentShips);
-                        move++;
-                    }
-                } else if (positioning == 2) {
-                    player2.ownBoard.showBoard();
-                    System.out.println("Bitte geben Sie zunächst die Y-Koordinate ein");
-                    int orientation = scanner.nextInt() - 1;
-                    System.out.println("Start des Schiffs X-Koordinate:");
-                    int CoordinatesStart = scanner.nextInt() - 1;
-                    System.out.println("Ende des Schiffs X-Koordinate:");
-                    int CoordinatesEnd = scanner.nextInt();
-                    if(placeShip(shipsP2[selection - 1], positioning, player2.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                        System.out.println("Bitte geben Sie zunächst die X-Koordinate ein");
+                        int orientation = scanner.nextInt() - 1;
+                        System.out.println("Start des Schiffs Y-Koordinate:");
+                        int CoordinatesStart = scanner.nextInt() - 1;
+                        System.out.println("Ende des Schiffs Y-Koordinate:");
+                        int CoordinatesEnd = scanner.nextInt() - 1;
+                        if (placeShip(shipsP2[selection - 1], positioning, player2.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                            player2.ownBoard.showBoard();
+                            int currentShips = player2.getQuantityShips();
+                            player2.setQuantityShips(--currentShips);
+                            move++;
+                        }
+                    } else if (positioning == 2) {
                         player2.ownBoard.showBoard();
-                        int currentShips = player2.getQuantityShips();
-                        player2.setQuantityShips(--currentShips);
-                        move++;
+                        System.out.println("Bitte geben Sie zunächst die Y-Koordinate ein");
+                        int orientation = scanner.nextInt() - 1;
+                        System.out.println("Start des Schiffs X-Koordinate:");
+                        int CoordinatesStart = scanner.nextInt() - 1;
+                        System.out.println("Ende des Schiffs X-Koordinate:");
+                        int CoordinatesEnd = scanner.nextInt() - 1;
+                        if (placeShip(shipsP2[selection - 1], positioning, player2.getId(), CoordinatesStart, orientation, CoordinatesEnd)) {
+                            player2.ownBoard.showBoard();
+                            int currentShips = player2.getQuantityShips();
+                            player2.setQuantityShips(--currentShips);
+                            move++;
+                        }
                     }
+                } else {
+                    System.out.println("Keine Schiffe mehr diesen Typs verfügbar");
                 }
             }
         }
     }
 
-
     private boolean placeShip(Ship ship, int positioning, int id, int CoordinatesStart, int orientation, int CoordinatesEnd) {
         if (id == 1) {
-            if (player1.ownBoard.setShips(ship.getLength(), positioning, CoordinatesStart, orientation, CoordinatesEnd, ship.getSign())) {
-                ship.setQuantity(ship.getQuantity() - 1);
-                return true;
+                if (player1.ownBoard.setShips(ship.getLength(), positioning, CoordinatesStart, orientation, CoordinatesEnd, ship.getSign())) {
+                    ship.setQuantity(ship.getQuantity() - 1);
+                    return true;
+                } else {
+                    System.out.println("Konnte nicht gesetzt werden");
+                    return false;
+                }
             } else {
-                System.out.println("Konnte nicht gesetzt werden");
-                return false;
-            }
-
-        } else {
-            if (player2.ownBoard.setShips(ship.getLength(), positioning, CoordinatesStart, orientation, CoordinatesEnd, ship.getSign())) {
-                ship.setQuantity(ship.getQuantity() - 1);
-                return true;
-            } else {
-                System.out.println("Konnte nicht gesetzt werden");
-                return false;
-            }
-
+                if (player2.ownBoard.setShips(ship.getLength(), positioning, CoordinatesStart, orientation, CoordinatesEnd, ship.getSign())) {
+                    ship.setQuantity(ship.getQuantity() - 1);
+                    return true;
+                } else {
+                    System.out.println("Konnte nicht gesetzt werden");
+                    return false;
+                }
         }
     }
 }
