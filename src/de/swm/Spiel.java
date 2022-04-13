@@ -181,9 +181,9 @@ public class Spiel {
             }
         }
         if(player1.getQuantityShips() == 0) {
-            System.out.println("Spieler 2 hat gewonnen");
-        } else {
             System.out.println("Spieler 1 hat gewonnen");
+        } else {
+            System.out.println("Spieler 2 hat gewonnen");
         }
     }
 }

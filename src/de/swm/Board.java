@@ -168,7 +168,7 @@ public class Board {
     }
 
     public boolean checkCoordinates(int xshoot, int yshoot, Board enemyboard, Ship[] ships, User player) {
-        if (board[yshoot][xshoot] != '~') {
+        if (board[yshoot][xshoot] != '~' && (enemyboard.board[yshoot][xshoot] != 'O' || enemyboard.board[yshoot][xshoot] != 'X')) {
             Ship ship = getShipBySign(xshoot, yshoot, ships);
             changeShipsLength(ship);
             if (checkIfShipIsSunk(ship)) {
@@ -179,11 +179,13 @@ public class Board {
                 return true;
             } else {
                 System.out.println("Treffer");
-                changeShipsLength(ship);
                 enemyboard.setHitMiss(xshoot, yshoot, true);
                 return true;
             }
-        } else {
+        } else if(enemyboard.board[yshoot][xshoot] == 'X' || enemyboard.board[yshoot][xshoot] == 'O') {
+            System.out.println("Wurde bereits beschossen");
+            return true;
+        } else{
             System.out.println("Wasser");
             enemyboard.setHitMiss(xshoot, yshoot, false);
             return false;
