@@ -33,7 +33,7 @@ public class Board {
     public boolean setShips(int length, int positioning, int coordinatesStart, int orientation, int coordinatesEnd, char shipType) {
         if (checkValidPlacement(length, coordinatesStart, coordinatesEnd, orientation, positioning))
             if (positioning == 1) {
-                for (int i = coordinatesStart; i < coordinatesEnd; i++) {
+                for (int i = coordinatesStart; i <= coordinatesEnd; i++) {
                     board[i][orientation] = shipType;
                 }
                 return true;
@@ -47,38 +47,50 @@ public class Board {
     }
 
     public boolean checkValidPlacement(int length, int coordinatesStart, int coordinatesEnd, int orientation, int positioning) {
-        if (board[coordinatesStart][orientation] != '~' || board[coordinatesEnd][orientation] != '~') {
+        if (coordinatesEnd - coordinatesStart < length - 1) {
             return false;
-        }
-            if (positioning == 1) {
+        }else if (positioning == 1) {
+                if (board[coordinatesStart][orientation] != '~' || board[coordinatesEnd][orientation] != '~') {
+                    return false;
+                }
                 if (coordinatesStart + length > board.length) {
                     return false;
                 }
-                for (int i = 0; i < length; i++) {
-                    if (coordinatesStart < 10 && (board[coordinatesStart + i][coordinatesStart + 1] != '~' || board[coordinatesStart + i][coordinatesStart] != '~')) {
-                        return false;
-                    } else if (coordinatesStart > 0 && (board[coordinatesStart + i][coordinatesStart - 1] != '~' || board[coordinatesStart + i][coordinatesStart] != '~')) {
-                        return false;
-                    }
-                }
-                if()
-                for (int i = coordinatesStart - 1; i <= coordinatesEnd + 1; i++) {
-                    if (board[i][orientation] == '~') {
+            if (coordinatesStart == 0 || orientation == 0) {
+                for (int i = coordinatesStart; i < length; i++) {
+                    if ((board[i + 1][orientation] != '~' || board[i][orientation + 1] != '~')) {
                         return false;
                     }
                 }
-            } else if (positioning == 0) {
-                if (coordinatesStart + length > 10) {
+            }else {
+                for (int i = coordinatesStart; i < length; i++) {
+                    if ((board[i + 1][orientation] != '~' || board[i][orientation + 1] != '~')) {
+                        return false;
+                    } else if ((board[i - 1][orientation] != '~' || board[coordinatesStart][orientation - 1] != '~')) {
+                        return false;
+                    }
+                }
+            }
+            } else if (positioning == 2) {
+                if (board[orientation][coordinatesStart] != '~' || board[orientation][coordinatesEnd] != '~') {
                     return false;
                 }
-                if (coordinatesStart + length < 9 && board[coordinatesStart][coordinatesStart + length] == 1) {
+                if (coordinatesStart + length > board.length) {
                     return false;
                 }
-                for (int i = 0; i < length; i++) {
-                    if (coordinatesStart < 10 && (board[coordinatesStart + 1][coordinatesStart + i] == 1 || board[coordinatesStart][coordinatesStart + i] == 1)) {
-                        return false;
-                    } else if (coordinatesStart > 0 && (board[coordinatesStart - 1][coordinatesStart + i] == 1 || board[coordinatesStart][coordinatesStart + i] == 1)) {
-                        return false;
+                if (coordinatesStart == 0 || orientation == 0) {
+                    for (int i = coordinatesStart; i < length; i++) {
+                        if ((board[orientation + 1][i] != '~' || board[orientation][coordinatesStart + i] != '~')) {
+                            return false;
+                        }
+                    }
+                }else {
+                    for (int i = coordinatesStart; i < length; i++) {
+                        if ((board[orientation + 1][i] != '~' || board[orientation][i + 1] != '~')) {
+                            return false;
+                        } else if ((board[orientation - 1][i] != '~' || board[orientation][i - 1] != '~')) {
+                            return false;
+                        }
                     }
                 }
             }
