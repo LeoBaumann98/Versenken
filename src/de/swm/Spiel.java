@@ -41,6 +41,8 @@ public class Spiel {
         }
     }
 
+    //Start des Spiels: Es werden Schiffe platziert
+
     private void shipSelection() {
         Scanner scanner = new Scanner(System.in);
         while (move < 14) {
@@ -128,6 +130,7 @@ public class Spiel {
         }
     }
 
+
     private boolean placeShip(Ship ship, int positioning, int id, int CoordinatesStart, int orientation, int CoordinatesEnd) {
         if (id == 1) {
                 if (player1.ownBoard.setShips(ship.getLength(), positioning, CoordinatesStart, orientation, CoordinatesEnd, ship.getSign())) {
@@ -147,6 +150,9 @@ public class Spiel {
                 }
         }
     }
+
+    // Nachdem die Schiffe platziert wurden, wird geschossen und sobald ein Spieler keine Schiffe mehr hat, hat der andere gewonnen
+
     private void shipShoot() {
         System.out.println("Spieler 1 ist nun dran");
         Scanner scanner = new Scanner(System.in);

@@ -29,6 +29,8 @@ public class Board {
         }
     }
 
+    //Platziert Schiffe nach Koordinaten(End und Startpunkt und einem festen X-Achsen oder Y-Achsen Punkt) und platziert an die Stelle einen Buchstaben
+
     public boolean setShips(int length, int positioning, int coordinatesStart, int orientation, int coordinatesEnd, char shipType) {
         if (checkValidPlacement(length, coordinatesStart, coordinatesEnd, orientation, positioning))
             if (positioning == 1) {
@@ -44,6 +46,8 @@ public class Board {
             }
         return false;
     }
+
+    //checkt alle Fälle ob ein anderes Schiff angrenzt
 
     public boolean checkValidPlacement(int length, int coordinatesStart, int coordinatesEnd, int orientation, int positioning) {
         if (coordinatesEnd - coordinatesStart != length - 1) {
@@ -136,6 +140,8 @@ public class Board {
         return true;
     }
 
+    // setzt auf das Spielbrett X für getroffen und O für Wasser
+
     private void setHitMiss(int xCoord, int yCoord, boolean hit) {
         if (hit) {
             board[yCoord][xCoord] = 'X';
@@ -144,9 +150,13 @@ public class Board {
         }
     }
 
+    // checkt anhand des übergebenen Schiffs ob dieses gesunken ist
+
     private boolean checkIfShipIsSunk (Ship ship) {
         return ship.isSunk();
     }
+
+    // holt das Schiff anhand des Buchstabens heraus und übergibt dieses
 
     private Ship getShipBySign(int xCoord, int yCoord,Ship[] ships) {
         char ship = board[yCoord][xCoord];
@@ -158,14 +168,20 @@ public class Board {
         return null;
     }
 
+    // verringert die Länge des Schiffs nach einem Treffer
+
     private void changeShipsLength(Ship ship) {
         ship.setLength(ship.getLength() - 1);
     }
+
+    // setzt die Länge zurück sodass bei Schiffen welche mehr als einmal vorkommen noch die Möglichkeit besteht diese zu versenken
 
     private void setShipLengthToDefault(Ship ship) {
         ship.setLengthToDefault();
         ship.setQuantity(ship.getQuantity()-1);
     }
+
+    // checkt ob getroffen wurde oder nicht
 
     public boolean checkCoordinates(int xshoot, int yshoot, Board enemyboard, Ship[] ships, User player) {
         if (board[yshoot][xshoot] != '~' && (enemyboard.board[yshoot][xshoot] != 'O' || enemyboard.board[yshoot][xshoot] != 'X')) {
