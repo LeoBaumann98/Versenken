@@ -160,9 +160,9 @@ public class Board {
 
     private Ship getShipBySign(int xCoord, int yCoord,Ship[] ships) {
         char ship = board[yCoord][xCoord];
-        for (int i = 0; i < ships.length; i++) {
-            if (ships[i].getSign() == ship) {
-                return ships[i];
+        for (Ship value : ships) {
+            if (value.getSign() == ship) {
+                return value;
             }
         }
         return null;
@@ -184,7 +184,7 @@ public class Board {
     // checkt ob getroffen wurde oder nicht
 
     public boolean checkCoordinates(int xshoot, int yshoot, Board enemyboard, Ship[] ships, User player) {
-        if (board[yshoot][xshoot] != '~' && (enemyboard.board[yshoot][xshoot] != 'O' || enemyboard.board[yshoot][xshoot] != 'X')) {
+        if (board[yshoot][xshoot] != '~' && enemyboard.board[yshoot][xshoot] != 'O' && enemyboard.board[yshoot][xshoot] != 'X') {
             Ship ship = getShipBySign(xshoot, yshoot, ships);
             changeShipsLength(ship);
             if (checkIfShipIsSunk(ship)) {

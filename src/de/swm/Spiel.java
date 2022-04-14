@@ -1,7 +1,6 @@
 package de.swm;
 
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class Spiel {
 
